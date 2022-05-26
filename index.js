@@ -17,7 +17,38 @@ mongoose
   })
   .then(() => {
     // Run your code here, after you have insured that the connection was made
+    return Recipe.create({
+      title: 'Chicke Tikka Masala',
+      level: 'Easy Peasy',
+      ingredients: ['Chicke', 'Masala', 'Chilli', 'Tomato'],
+      cuisine: 'Nepali',
+      dishType: 'main_course',
+      duration: 30,
+      creator: 'Loken'
+    })
   })
+
+  .then((response) => console.log(response.title))
+  
+      Recipe.insertMany(data)
+      .then((data) => {
+        data.forEach((recipe) => {
+          console.log(recipe.title)
+        })
+        
+        Recipe.findOneAndUpdate({ title: 'Rigatoni alla Genovese'}, 
+        {duration: 100}
+        )
+        console.log('success')
+      })
+
+      .then(()=> {
+        Recipe.deleteOne({ title: 'Carrot Cake '})
+        .then((data) => {
+          console.log('One missing')
+        })
+      })
+
   .catch(error => {
     console.error('Error connecting to the database', error);
   });
